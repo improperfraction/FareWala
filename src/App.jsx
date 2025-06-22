@@ -1,6 +1,4 @@
-import { use, useEffect, useRef, useState } from 'react'
-import SlidingPopScreen from './Autofarecaluculator';
-import { set } from 'mongoose';
+import { useEffect, useRef, useState } from 'react'
 
 function App() {
 
@@ -129,8 +127,6 @@ function App() {
           </div>
         </div>
       </div>
-      {/* <ConditionalSlider/> */}
-      {/* <SlidingPopScreen/> */}
     </>
   )
 }
