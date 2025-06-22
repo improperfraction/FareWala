@@ -10,7 +10,7 @@ function App() {
   const [fare, setFare] = useState(0);
 
 
-  const sliderRef= useRef(null);
+  const sliderRef = useRef(null);
 
   const handleReset = () => {
     setDist('');
@@ -18,16 +18,16 @@ function App() {
   }
   useEffect(() => {
     const clickOutside = (e) => {
-        if (sliderRef.current && !sliderRef.current.contains(e.target)) {
-          setIsOpen(false);
-          setBdown(false);
-        }
+      if (sliderRef.current && !sliderRef.current.contains(e.target)) {
+        setIsOpen(false);
+        setBdown(false);
+      }
     }
     document.addEventListener("mousedown", clickOutside);
     return () => {
-        document.removeEventListener("mousedown", clickOutside);
+      document.removeEventListener("mousedown", clickOutside);
     }
-}, [setIsOpen]);
+  }, [setIsOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -91,37 +91,42 @@ function App() {
               <div className="w-full p-2 lg:w-1/3 flex flex-col justify-between items-center ">
                 <h2 className="text-lg text-black dark:text-white font-semibold">Estimated Fare</h2>
                 {fare === 0 && dist == '' && <p className="text-red-400 mt-2 text-sm lg:text-base text-center">Please enter a valid distance greater than 1.5 km</p>}
-               {fare !=0 && dist != '' &&
-               <div className='w-full'>
-                <p className='text-sm lg:text-base text-black text-center dark:text-white'>We estimate that your fare would be </p>
-                <p className="text-4xl text-black dark:text-white my-2 text-center lg:text-6xl font-extrabold">₹ {fare}</p>
-                {bdown && <div className="border border-gray-300 dark:border-gray-400 p-4 w-full mt-4">
-                  <div className="grid grid-cols-2 gap-y-2 text-black dark:text-white text-sm sm:text-base">
-                    <div className="font-medium text-black dark:text-white">Region:</div>
-                    <div className='text-black pl-2 dark:text-white'>Pune & PCMC</div>
-                    <div className="font-medium text-black dark:text-white">Base Fare for first 1.5 km:</div>
-                    <div className='text-black dark:text-white pl-2'>26</div>
-                    <div className="font-medium text-black dark:text-white">Remaining Distance:</div>
-                    <div className='text-black dark:text-white pl-2'>{dist - 1.5}</div>
-                    <div className="font-medium text-black dark:text-white">Rate per km:</div>
-                    <div className='pl-2'>17.14</div>
-                    <div className="font-medium">Remaining fare:</div>
-                    <div className='pl-2'>{fare-26}</div>
-                    <div className="font-medium">Night charges:</div>
-                    <div className='pl-2'>{nt? "Yes": "No"}</div>
-                    <div className="font-semibold mt-2">Total:</div>
-                    <div className="font-semibold mt-2 pl-2">{fare}</div>
-                  </div>
-                </div>}
-                <button onClick={() => {
-                  setBdown(!bdown); // Toggle the break down view
-                }} className="bg-black text-white w-full py-2 my-1 rounded-lg">{bdown ? "Hide break down" : "Show break down"} </button>
-                </div>}
+                {fare != 0 && dist != '' &&
+                  <div className='w-full'>
+                    <p className='text-sm lg:text-base text-black text-center dark:text-white'>We estimate that your fare would be </p>
+                    <p className="text-4xl text-black dark:text-white my-2 text-center lg:text-6xl font-extrabold">₹ {fare}</p>
+                    {bdown && <div className="border border-gray-300 dark:border-gray-400 p-4 w-full mt-4">
+                      <div className="grid grid-cols-2 gap-y-2  text-black dark:text-white text-sm sm:text-base">
+                        <div className="font-medium text-black dark:text-white">Region:</div>
+                        <div className='text-black pl-2 dark:text-white'>Pune & PCMC</div>
+                        <div className="font-medium text-black dark:text-white">Base Fare for first 1.5 km:</div>
+                        <div className='text-black dark:text-white pl-2'>26</div>
+                        <div className="font-medium text-black dark:text-white">Remaining Distance:</div>
+                        <div className='text-black dark:text-white pl-2'>{dist - 1.5}</div>
+                        <div className="font-medium text-black dark:text-white">Rate per km:</div>
+                        <div className='pl-2'>17.14</div>
+                        <div className="font-medium">Remaining fare:</div>
+                        <div className='pl-2'>{fare - 26}</div>
+                        <div className="font-medium">Night charges:</div>
+                        <div className='pl-2'>{nt ? "Yes" : "No"}</div>
+                        <div className="font-semibold mt-2">Total:</div>
+                        <div className="font-semibold mt-2 pl-2">{fare}</div>
+                      </div>
+                      <p className="mt-2 text-xs lg:text-sm text-gray-500 dark:text-gray-200">Above fare calculations are based on Govt directed Auto-Rickshaw{" "}
+                        <a href="/tarrifcard.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline hover:text-blue-800">
+                          tariff card
+                        </a>
+                      </p>
+                    </div>}
+                    <button onClick={() => {
+                      setBdown(!bdown); // Toggle the break down view
+                    }} className="bg-black text-white w-full py-2 my-1 rounded-lg">{bdown ? "Hide break down" : "Show break down"} </button>
+                  </div>}
                 <button onClick={() => {
                   setIsOpen(!isOpen); // Close the sliding pop screen
                   setBdown(false); // Reset breakdown view
-                }} className="bg-white text-black w-full py-2 my-1 rounded-lg">Cancel </button> 
-                
+                }} className="bg-white text-black w-full py-2 my-1 rounded-lg">Cancel </button>
+
               </div>
             </div>
           </div>
